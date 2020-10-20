@@ -18,6 +18,7 @@ class Gift
 			,card7:"https://oroafrica.github.io/alto/C1/card_7.png"
 			,card8:"https://oroafrica.github.io/alto/C1/card_8.png"
 			,card9:"https://oroafrica.github.io/alto/C1/card_9.png"
+			//http://memiupg.uat.cslweb.uk/design/themes/GiddyStore/oajs/nameStyle.js
 		})[a];};
 		this.myFont = ["BrushSignature","SoftSignature"];
 		this.themeNo = 0;
