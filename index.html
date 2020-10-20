@@ -24,16 +24,19 @@
 	<div class="container-fluid text-center mt-5">
 		<div id="root" class="d-flex justify-content-center p-4">
 			<div class="bb shadow-sm" id="b1"><canvas class="border rounded" id="canvas" title="original outline">canvas not supported</canvas></div>
-			<div class="btn-group-vertical">
-			<input type="button" class="btn btn-outline-primary rounded" value="Texts: "/> 
-			<input type="button" class="btn btn-outline-primary rounded" value="Card"/> 
-			<input type="button" class="btn btn-outline-primary rounded" value="font"/> 
-			<input type="button" class="btn btn-outline-primary rounded" value="Clear Text"/> 
-			<input type="button" class="btn btn-outline-primary rounded" value="Save"/> 
+			<div class="btn-group-vertical"> 
+				<button class="btn" id="texts" title="Add text" ><span class=""><i class="fas fa-file-signature  fa-2x"></i></span></button>
+				<button class="btn" id="colours" title="Font colour" ><span class=""><i class="fas fa-palette fa-2x"></i></span></button>
+				<button class="btn" id="fonts" title="Change font" ><span class=""><i class="fas fa-font  fa-2x"></i></span></button>
+				<button class="btn" id="aligns" title="Justify text" ><span class=""><i class="fas fa-align-justify  fa-2x"></i></span></button>
+				<button class="btn" id="deletes" title="Delete selected text" ><span class=""><i class="fas fa-trash-alt  fa-2x"></i></span></button>
+				<button class="btn" id="cards" title="Change card" ><span class=""><i class="fas fa-images  fa-2x"></i></span></button>
+				<button class="btn" id="downloads" title="Download card" ><span class=""><i class="fas fa-save fa-2x"></i></span></button>
 			</div>
 		</div>
 		
 		<div class="btn-group-vertical text-center mx-auto justify-content-spacing d-none">
+			<textarea >sammple</textarea>
 			<input class="btn btn-outline-primary "  type="button" value="testing" id="test"  />
 			<input class="form-control" type="text" id="txt" title="Enter your name here" value="Evelyn" />
 		</div>
@@ -50,7 +53,7 @@
 			{
 			  console.log('fonts loaded');
 			});
-		$(document).ready(new Gift().render());
+		$(document).ready(new Gift());
 	</script>
 
 </body>

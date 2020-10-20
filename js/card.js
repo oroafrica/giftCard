@@ -20,8 +20,10 @@ class Gift
 			,card9:"https://oroafrica.github.io/alto/C1/card_9.png"
 			//http://memiupg.uat.cslweb.uk/design/themes/GiddyStore/oajs/nameStyle.js
 		})[a];};
+		this.cards =(a)=>{return `https://oroafrica.github.io/giftCard/images/card_${a}.png`};
 		this.myFont = ["BrushSignature","SoftSignature"];
-		this.themeNo = 0;
+		this.themeNo = 1;
+		return this.render.bind(this)();
 	}
 
 	addText()
@@ -76,12 +78,9 @@ class Gift
 	
 	getTheme()
 	{ 
-		$($("input").toArray()[1]).click((e)=> 
-		{
-			console.log(this.themeNo);
-			this.canvas.setBackgroundImage(this.themes(this.themeNo),this.canvas.renderAll.bind(this.canvas),{crossOrigin:"anonymous"});
-			this.themeNo = (this.themeNo > 7) ? 0 : (this.themeNo += 1);
-			
+		$(document).on("click","button",(e)=>{
+			this.canvas.setBackgroundImage(this.cards(this.themeNo),this.canvas.renderAll.bind(this.canvas),{crossOrigin:"anonymous"});
+			this.themeNo = (this.themeNo > 23) ? 1 : (this.themeNo += 1);
 		});
 	}
 	
