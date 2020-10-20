@@ -75,7 +75,7 @@ class Gift
 	}
 	
 	getTheme()
-	{
+	{ 
 		$($("input").toArray()[1]).click((e)=> 
 		{
 			console.log(this.themeNo);
