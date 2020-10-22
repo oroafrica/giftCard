@@ -26,6 +26,17 @@ class Gift
 		return this.render.bind(this)();
 	}
 
+	msg(a){console.log("msg: ".concat(a))} 
+
+	getTheme()
+	{ 
+		$(document).on("click","button",(e)=>{
+			this.msg($(e.target).parent().parent().prop("id"));
+			this.canvas.setBackgroundImage(this.cards(this.themeNo),this.canvas.renderAll.bind(this.canvas),{crossOrigin:"anonymous"});
+			this.themeNo = (this.themeNo > 23) ? 1 : (this.themeNo += 1);
+		});
+	}
+
 	addText()
 	{
 		var inputs = $("input").toArray();
@@ -76,13 +87,7 @@ class Gift
 		});
 	}
 	
-	getTheme()
-	{ 
-		$(document).on("click","button",(e)=>{
-			this.canvas.setBackgroundImage(this.cards(this.themeNo),this.canvas.renderAll.bind(this.canvas),{crossOrigin:"anonymous"});
-			this.themeNo = (this.themeNo > 23) ? 1 : (this.themeNo += 1);
-		});
-	}
+	
 	
 	getFont()
 	{
@@ -116,10 +121,10 @@ class Gift
 	render()
 	{
 		console.log("opening gift");
-		this.addText();
-		this.clearText();
+		// this.addText();
+		// this.clearText();
 		this.getTheme();
-		this.getFont();
-		this.serializeCanvas();
+		// this.getFont();
+		// this.serializeCanvas();
 	}
 }
