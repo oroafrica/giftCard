@@ -72,12 +72,23 @@
 	<script src="./js/card.js" ></script>
 	<script src="https://oroafrica.github.io/store/js/fontFaceObserver.js" ></script>
 	<script >
+		var f = [new FontFaceObserver('BrushSignature').load()
+		,new FontFaceObserver('SoftSignature').load()
+		,new FontFaceObserver('Hero').load()
+		,new FontFaceObserver('Lovely').load()
+		,new FontFaceObserver('Bronwilla').load()
+		,new FontFaceObserver('Poppins').load()];
+		Promise.all(f).then(function () {console.log('fonts loaded');});
+			  
+			
+		/*
 			var fontA = new FontFaceObserver('BrushSignature');
 			var fontB = new FontFaceObserver('SoftSignature');
 			Promise.all([fontA.load(),fontB.load()]).then(function () 
 			{
 			  console.log('fonts loaded');
 			});
+		*/
 		$(document).ready(new Gift());
 	</script>
 

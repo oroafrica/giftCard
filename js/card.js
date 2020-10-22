@@ -3,7 +3,7 @@ class Gift
 	constructor()
 	{
 		this.canvas = new fabric.Canvas("canvas",{backgroundColor:"#efefef",width:600,height:400});
-		// this.note = [0,1,2,3,4];
+		this.note = [0,1,2,3,4];
 		this.noteCount = 0;
 		this.fontCount = 0;
 		// this.schema = {love:"",birthday:"",valentine:"",anniversary:""};
@@ -43,28 +43,24 @@ class Gift
 
 	addText()
 	{
-		var inputs = $("input").toArray();
-		$(inputs[0]).click(()=> 
-		{
+		$(document).on("click","button",(e)=>{
+			if($(e.target).parent().parent().prop("id") !== "texts") return;
 			
 			if(this.noteCount < 5)
 			{
-				let updatedTxt = $(inputs[0]).val().replace(/[0-9]/gi,"").concat(4-this.noteCount);
-				$(inputs[0]).val(updatedTxt);
-				
-				this.note[this.noteCount] = new fabric.IText("Text",
-				{
+				let updatedTxt = "Text";
+				let props = {
 					fill:"#000"
 					,originX:"center"
 					,originY:"center"
 					,left:this.canvas.width/2
-					,fontFamily:"BrushSignature"
 					,objectCaching:false
 					,textAlign:"center"
-				});
-				this.canvas.add(this.note[this.noteCount]);
-				
-				this.note[this.noteCount].animate("top",this.canvas.height/2,
+					,top:100
+				};
+				var s = new fabric.IText("Text",props);
+				this.canvas.add(s);
+				s.animate("top",this.canvas.height/2,
 				{
 					start:0
 					,duration:1000
@@ -96,9 +92,13 @@ class Gift
 	getFont()
 	{
 		$(document).on("click","button",(e)=>{
-			if($(e.target).parent().parent().prop("id") !== "fonts") return;
+			if($(e.target).parent().parent().prop("id") !== "fonts" || this.noteCount <1) return;
+			this.msg(this.noteCount);
 			this.fontCount = (this.fontCount > 5) ? 0 : this.fontCount;
 			this.msg(this.myFont(this.fontCount));
+			let obj = this.canvas.getActiveObject();
+			obj.set({fontFamily:this.myFont(this.fontCount)});
+			this.canvas.renderAll();
 			this.fontCount++;
 		});
 		// $($("input").toArray()[2]).click((e)=> 
@@ -131,7 +131,7 @@ class Gift
 	render()
 	{
 		console.log("opening gift");
-		// this.addText();
+		this.addText();
 		// this.clearText();
 		this.getCards();
 		this.getFont();
