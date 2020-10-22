@@ -28,10 +28,11 @@ class Gift
 
 	msg(a){console.log("msg: ".concat(a))} 
 
-	getTheme()
+	getCards()
 	{ 
 		$(document).on("click","button",(e)=>{
 			this.msg($(e.target).parent().parent().prop("id"));
+			if($(e.target).parent().parent().prop("id") !== "cards") return;
 			this.canvas.setBackgroundImage(this.cards(this.themeNo),this.canvas.renderAll.bind(this.canvas),{crossOrigin:"anonymous"});
 			this.themeNo = (this.themeNo > 23) ? 1 : (this.themeNo += 1);
 		});
@@ -123,7 +124,7 @@ class Gift
 		console.log("opening gift");
 		// this.addText();
 		// this.clearText();
-		this.getTheme();
+		this.getCards();
 		// this.getFont();
 		// this.serializeCanvas();
 	}
