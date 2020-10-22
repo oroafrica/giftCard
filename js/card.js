@@ -18,6 +18,10 @@ class Gift
 			,card7:"https://oroafrica.github.io/alto/C1/card_7.png"
 			,card8:"https://oroafrica.github.io/alto/C1/card_8.png"
 			,card9:"https://oroafrica.github.io/alto/C1/card_9.png"
+			,card9:"https://oroafrica.github.io/alto/C1/card_10.png"
+			,card9:"https://oroafrica.github.io/alto/C1/card_11.png"
+			,card9:"https://oroafrica.github.io/alto/C1/card_12.png"
+			,card9:"https://oroafrica.github.io/alto/C1/card_13.png"
 			//http://memiupg.uat.cslweb.uk/design/themes/GiddyStore/oajs/nameStyle.js
 		})[a];};
 		this.cards =(a)=>{return `https://oroafrica.github.io/giftCard/images/card_${a}.png`};
