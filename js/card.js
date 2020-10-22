@@ -3,10 +3,10 @@ class Gift
 	constructor()
 	{
 		this.canvas = new fabric.Canvas("canvas",{backgroundColor:"#efefef",width:600,height:400});
-		this.note = [0,1,2,3,4];
+		// this.note = [0,1,2,3,4];
 		this.noteCount = 0;
 		this.fontCount = 0;
-		this.schema = {love:"",birthday:"",valentine:"",anniversary:""};
+		// this.schema = {love:"",birthday:"",valentine:"",anniversary:""};
 		this.themes = (a)=> {return Object.values(
 		{
 			card1: "https://oroafrica.github.io/alto/C1/card_1.png"
@@ -18,14 +18,14 @@ class Gift
 			,card7:"https://oroafrica.github.io/alto/C1/card_7.png"
 			,card8:"https://oroafrica.github.io/alto/C1/card_8.png"
 			,card9:"https://oroafrica.github.io/alto/C1/card_9.png"
-			,card9:"https://oroafrica.github.io/alto/C1/card_10.png"
-			,card9:"https://oroafrica.github.io/alto/C1/card_11.png"
-			,card9:"https://oroafrica.github.io/alto/C1/card_12.png"
-			,card9:"https://oroafrica.github.io/alto/C1/card_13.png"
+			,card10:"https://oroafrica.github.io/alto/C1/card_10.png"
+			,card11:"https://oroafrica.github.io/alto/C1/card_11.png"
+			,card12:"https://oroafrica.github.io/alto/C1/card_12.png"
+			,card13:"https://oroafrica.github.io/alto/C1/card_13.png"
 			//http://memiupg.uat.cslweb.uk/design/themes/GiddyStore/oajs/nameStyle.js
 		})[a];};
 		this.cards =(a)=>{return `https://oroafrica.github.io/giftCard/images/card_${a}.png`};
-		this.myFont = ["BrushSignature","SoftSignature"];
+		this.myFont = (a)=>{return ["BrushSignature","SoftSignature","Hero","Lovely","Poppins","Bronwilla"][a]};
 		this.themeNo = 1;
 		return this.render.bind(this)();
 	}
@@ -35,10 +35,9 @@ class Gift
 	getCards()
 	{ 
 		$(document).on("click","button",(e)=>{
-			this.msg($(e.target).parent().parent().prop("id"));
 			if($(e.target).parent().parent().prop("id") !== "cards") return;
 			this.canvas.setBackgroundImage(this.cards(this.themeNo),this.canvas.renderAll.bind(this.canvas),{crossOrigin:"anonymous"});
-			this.themeNo = (this.themeNo > 23) ? 1 : (this.themeNo += 1);
+			this.themeNo = (this.themeNo > 12) ? 1 : (this.themeNo += 1);
 		});
 	}
 
@@ -96,24 +95,30 @@ class Gift
 	
 	getFont()
 	{
-		$($("input").toArray()[2]).click((e)=> 
-		{
-			let obj = this.canvas.getActiveObject();
-			this.fontCount = (this.fontCount === 0) ? 0 : 1;
-			obj.set({fontFamily:this.myFont[this.fontCount]});
-			 
-			this.canvas.renderAll();
-			this.fontCount = (this.fontCount === 1) ? 0 : 1;
+		$(document).on("click","button",(e)=>{
+			if($(e.target).parent().parent().prop("id") !== "fonts") return;
+			this.fontCount = (this.fontCount > 5) ? 0 : this.fontCount;
+			this.msg(this.myFont(this.fontCount));
+			this.fontCount++;
 		});
+		// $($("input").toArray()[2]).click((e)=> 
+		// {
+		// 	let obj = this.canvas.getActiveObject();
+		// 	this.fontCount = (this.fontCount === 0) ? 0 : 1;
+		// 	obj.set({fontFamily:this.myFont[this.fontCount]});
+			 
+		// 	this.canvas.renderAll();
+		// 	this.fontCount = (this.fontCount === 1) ? 0 : 1;
+		// });
 	}
 	
 	serializeCanvas()
 	{
-		$($("input").toArray()[4]).click((e)=> 
-		{
+		$(document).on("click","button",(e)=>{
+			if($(e.target).parent().parent().prop("id") !== "downloads") return;
 			 // window.open(this.canvas.toDataURL('png'));
 			let anc = document.createElement("a");
-			anc.download="mickey.png";
+			anc.download=`card_${this.themeNo}.png`;
 			anc.id="dummy";
 			anc.crossOrigin = "anonymous";
 			anc.href= this.canvas.toDataURL("image/png");
@@ -129,7 +134,7 @@ class Gift
 		// this.addText();
 		// this.clearText();
 		this.getCards();
-		// this.getFont();
-		// this.serializeCanvas();
+		this.getFont();
+		this.serializeCanvas();
 	}
 }
