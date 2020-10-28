@@ -6,27 +6,18 @@ class Gift
 		this.note = [0,1,2,3,4];
 		this.noteCount = 0;
 		this.fontCount = 0;
-		// this.schema = {love:"",birthday:"",valentine:"",anniversary:""};
-		this.themes = (a)=> {return Object.values(
-		{
-			card1: "https://oroafrica.github.io/alto/C1/card_1.png"
-			,card2:"https://oroafrica.github.io/alto/C1/card_2.png"
-			,card3:"https://oroafrica.github.io/alto/C1/card_3.png"
-			,card4:"https://oroafrica.github.io/alto/C1/card_4.png"
-			,card5:"https://oroafrica.github.io/alto/C1/card_5.png"
-			,card6:"https://oroafrica.github.io/alto/C1/card_6.png"
-			,card7:"https://oroafrica.github.io/alto/C1/card_7.png"
-			,card8:"https://oroafrica.github.io/alto/C1/card_8.png"
-			,card9:"https://oroafrica.github.io/alto/C1/card_9.png"
-			,card10:"https://oroafrica.github.io/alto/C1/card_10.png"
-			,card11:"https://oroafrica.github.io/alto/C1/card_11.png"
-			,card12:"https://oroafrica.github.io/alto/C1/card_12.png"
-			,card13:"https://oroafrica.github.io/alto/C1/card_13.png"
-			//http://memiupg.uat.cslweb.uk/design/themes/GiddyStore/oajs/nameStyle.js
-		})[a];};
 		this.cards =(a)=>{return `https://oroafrica.github.io/giftCard/images/card_${a}.png`};
 		this.myFont = (a)=>{return ["BrushSignature","SoftSignature","Hero","Lovely","Poppins","Bronwilla"][a]};
 		this.themeNo = 1;
+		this.fontColCount = 0;
+		this.fontColours = (a)=>{return ["#000","#838383","#5d5d5d"][a]};
+
+		fabric.Object.prototype.transparentCorners = false;
+		fabric.Object.prototype.cornerColor = 'blue';
+		fabric.Object.prototype.cornerStyle = 'circle';
+
+		
+
 		return this.render.bind(this)();
 	}
 
@@ -48,7 +39,8 @@ class Gift
 			
 			if(this.noteCount < 5)
 			{
-				let updatedTxt = "Text";
+				
+				let updatedTxt = " ";
 				let props = {
 					fill:"#000"
 					,originX:"center"
@@ -67,22 +59,22 @@ class Gift
 					,onChange:this.canvas.renderAll.bind(this.canvas)
 				});
 				
+				this.canvas.setActiveObject(s);
+				s.enterEditing();
 				this.noteCount +=1;
+				
 			}
-			
 		});
-
-		
 	}
 	
 	clearText()
 	{
-		$($("input").toArray()[3]).click((e)=> 
-		{
+		$(document).on("click","button",(e)=>{
+			if($(e.target).parent().parent().prop("id") !== "deletes") return;
 			$(this.note).each((i)=>
 			{
-				this.canvas.remove(this.note[i])
-				this.noteCount = 0;
+				this.canvas.remove(this.canvas.getActiveObject());
+				this.noteCount = (this.noteCount <0) ? 1 : this.noteCount-1;
 			});
 		});
 	}
@@ -92,24 +84,14 @@ class Gift
 	getFont()
 	{
 		$(document).on("click","button",(e)=>{
-			if($(e.target).parent().parent().prop("id") !== "fonts" || this.noteCount <1) return;
-			this.msg(this.noteCount);
+			if($(e.target).parent().parent().prop("id") !== "fonts" || this.noteCount < 1 || typeof this.canvas.getActiveObject() === "undefined" ) return;
+
 			this.fontCount = (this.fontCount > 5) ? 0 : this.fontCount;
-			this.msg(this.myFont(this.fontCount));
 			let obj = this.canvas.getActiveObject();
 			obj.set({fontFamily:this.myFont(this.fontCount)});
 			this.canvas.renderAll();
 			this.fontCount++;
 		});
-		// $($("input").toArray()[2]).click((e)=> 
-		// {
-		// 	let obj = this.canvas.getActiveObject();
-		// 	this.fontCount = (this.fontCount === 0) ? 0 : 1;
-		// 	obj.set({fontFamily:this.myFont[this.fontCount]});
-			 
-		// 	this.canvas.renderAll();
-		// 	this.fontCount = (this.fontCount === 1) ? 0 : 1;
-		// });
 	}
 	
 	serializeCanvas()
@@ -128,13 +110,58 @@ class Gift
 		});
 	}
 	
+	changeColour()
+	{
+		$(document).on("click","button",(e)=>{
+			if($(e.target).parent().parent().prop("id") !== "colours" || typeof this.canvas.getActiveObject() === "undefined" ) return;
+			let s = this.canvas.getActiveObject();
+			this.fontColCount = (this.fontColCount > 2) ? 0 :this.fontColCount;
+			 s.set({fill:this.fontColours(this.fontColCount)});
+			 this.fontColCount +=1;
+			 this.canvas.discardActiveObject().renderAll();
+			 this.canvas.setActiveObject(s);
+		});
+	}
+	init()
+	{
+		this.canvas.setBackgroundImage(this.cards(1),this.canvas.renderAll.bind(this.canvas),{crossOrigin:"anonymous"});
+	}
+
+	debug(isDebug)
+	{
+		$(document).on("click",".btn",(e)=>{
+		let report = {init:"Starting Gift Card!",fonts:this.myFont(this.fontCount),cards:this.cards(this.themeNo),textObject:this.noteCount,fontColour:this.fontColCount-1};
+		this.msg(JSON.stringify(report));
+		});
+	}
+	deleteObject()
+	{
+
+	}
 	render()
 	{
-		console.log("opening gift");
+		fabric.Object.prototype.controls.deleteControl = new fabric.Control();
+		d.deleteContr
+		this.init();
 		this.addText();
-		// this.clearText();
+		this.clearText();
 		this.getCards();
 		this.getFont();
 		this.serializeCanvas();
+		this.changeColour();
+		this.debug();
 	}
 }
+
+/*  fabric.Object.prototype.controls.deleteControl = new fabric.Control({
+    x: 0.5,
+    y: -0.5,
+    offsetY: -16,
+    offsetX: 16,
+    cursorStyle: 'pointer',
+    mouseUpHandler: deleteObject,
+    render: renderIcon(deleteImg),
+    cornerSize: 24
+  });
+
+  */

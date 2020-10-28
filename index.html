@@ -4,7 +4,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.1.0/fabric.min.js"></script>
+<script src="./js/fabric.js"></script>
+<script defer src="./js/customiseControls.js"></script>
 <script src="https://kit.fontawesome.com/85dc21c703.js" crossorigin="anonymous"></script>
 <style>
 	@font-face 
@@ -47,12 +48,16 @@
 
 <body>
 	<div class="container-fluid text-center mt-5">
+		<div>
+			<img src="https://www.memijewellery.com/images/logos/1/logo_version_3.png" />
+		</div>
+
 		<div id="root" class="d-flex justify-content-center p-4">
-			<div class="bb shadow-sm" id="b1"><canvas class="border rounded" id="canvas" title="original outline">canvas not supported</canvas></div>
+			<div class="bb shadow-sm" id="b1"><canvas class="border rounded shadow-sm" id="canvas" title="original outline">canvas not supported</canvas></div>
 			<div class="btn-group-vertical"> 
-				<button class="btn" id="texts" title="Add text" ><span class=""><i class="fas fa-file-signature  fa-2x"></i></span></button>
+				<button class="btn" id="texts" title="Add text" ><span class=""><i class="fas fa-font  fa-2x"></i></span></button>
 				<button class="btn" id="colours" title="Font colour" ><span class=""><i class="fas fa-palette fa-2x"></i></span></button>
-				<button class="btn" id="fonts" title="Change font" ><span class=""><i class="fas fa-font  fa-2x"></i></span></button>
+				<button class="btn" id="fonts" title="Change font" ><span class=""><i class="fas fa-pen-nib  fa-2x"></i></span></button>
 				<button class="btn" id="aligns" title="Justify text" ><span class=""><i class="fas fa-align-justify  fa-2x"></i></span></button>
 				<button class="btn" id="deletes" title="Delete selected text" ><span class=""><i class="fas fa-trash-alt  fa-2x"></i></span></button>
 				<button class="btn" id="cards" title="Change card" ><span class=""><i class="fas fa-images  fa-2x"></i></span></button>
@@ -68,7 +73,7 @@
 		
 		<h5 id="h" class="fixed-bottom mb-5"></h5>
 	</div>
-
+	
 	<script src="./js/card.js" ></script>
 	<script src="https://oroafrica.github.io/store/js/fontFaceObserver.js" ></script>
 	<script >
