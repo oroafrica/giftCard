@@ -12,9 +12,9 @@ class Gift
 		this.fontColCount = 0;
 		this.fontColours = (a)=>{return ["#000","#838383","#5d5d5d"][a]};
 
-		fabric.Object.prototype.transparentCorners = false;
-		fabric.Object.prototype.cornerColor = 'blue';
-		fabric.Object.prototype.cornerStyle = 'circle';
+		
+		// fabric.Object.prototype.hasBorders = false;
+		// fabric.Object.prototype.cornerSize= 5;
 
 		
 
@@ -136,12 +136,13 @@ class Gift
 	}
 	deleteObject()
 	{
-
+		fabric.Object.prototype.transparentCorners = true;
+		fabric.Object.prototype.cornerStyle = 'circle';
 	}
 	render()
 	{
-		fabric.Object.prototype.controls.deleteControl = new fabric.Control();
-		d.deleteContr
+		
+	
 		this.init();
 		this.addText();
 		this.clearText();
@@ -150,7 +151,9 @@ class Gift
 		this.serializeCanvas();
 		this.changeColour();
 		this.debug();
+		this.deleteObject();
 	}
+	
 }
 
 /*  fabric.Object.prototype.controls.deleteControl = new fabric.Control({
