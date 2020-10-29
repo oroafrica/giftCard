@@ -11,10 +11,6 @@ class Gift
 		this.themeNo = 1;
 		this.fontColCount = 0;
 		this.fontColours = (a)=>{return ["#000","#838383","#5d5d5d"][a]};
-
-		
-		
-
 		
 
 		return this.render.bind(this)();
@@ -59,7 +55,7 @@ class Gift
 				});
 				
 				this.canvas.setActiveObject(s);
-				// s.enterEditing();
+				s.enterEditing();
 				this.noteCount +=1;
 				
 			}
@@ -135,58 +131,47 @@ class Gift
 	}
 	deleteObject()
 	{
-		fabric.Object.prototype.cornerStyle = 'round';
-		fabric.Object.prototype.cornerColor = 'blue';
-		fabric.Object.prototype.transparentCorners = true;
-		fabric.Object.prototype.cornerSize=25;
-
-
 		fabric.Canvas.prototype.customiseControls({
-		tl: {
-			action: 'rotate',
-			cursor: 'hover',
-			icon:"../icons/remove.svg"
-		},
-		tr: {
-			action: 'scale',
-			icon:'remove',
-			cursor:'remove'
-		},
-		bl: {
-			action: 'remove',
-			cursor: "../icons/up.svg",
-		},
-		br: {
-			action: 'moveUp',
-			cursor: 'pointer',
-		},
-		mb: {
-			action: 'moveDown',
-			cursor: 'pointer',
-		},
-		mr: {
-			action: function(e, target) {
-				target.set({
-					left: 200,
-				});
-				this.canvas.renderAll();
+			tl: {
+				action: 'rotate',
+				cursor: 'hover',
 			},
-			cursor: 'pointer',
-		},
-		mt: {
-			action: {
-				'rotateByDegrees': 30,
+			tr: {
+				action: 'scale',
 			},
-			cursor: 'pointer',
-		}
-	});
-		  
-
+			bl: {
+				action: 'remove',
+				cursor: 'pointer',
+			},
+			br: {
+				action: 'moveUp',
+				cursor: 'pointer',
+			},
+			mb: {
+				action: 'moveDown',
+				cursor: 'pointer',
+			},
+			mr: {
+				action: function(e, target) {
+					target.set({
+						left: 200,
+					});
+					this.canvas.renderAll();
+				},
+				cursor: 'pointer',
+			},
+			mt: {
+				action: {
+					'rotateByDegrees': 30,
+				},
+				cursor: 'pointer',
+			}
+		});
 	}
 	render()
 	{
 		
-	
+		this.deleteObject();
 		this.init();
 		this.addText();
 		this.clearText();
@@ -195,7 +180,20 @@ class Gift
 		this.serializeCanvas();
 		this.changeColour();
 		this.debug();
-		this.deleteObject();
+		
 	}
 	
 }
+
+/*  fabric.Object.prototype.controls.deleteControl = new fabric.Control({
+    x: 0.5,
+    y: -0.5,
+    offsetY: -16,
+    offsetX: 16,
+    cursorStyle: 'pointer',
+    mouseUpHandler: deleteObject,
+    render: renderIcon(deleteImg),
+    cornerSize: 24
+  });
+
+  */

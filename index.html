@@ -52,7 +52,7 @@
 		</div>
 
 		<div id="root" class="d-flex justify-content-center p-4">
-			<div class="bb shadow-sm" id="b1"><canvas class="border rounded shadow-sm" id="canvas" title="original outline">canvas not supported</canvas></div>
+			<div class="bb shadow" id="b1"><canvas class="border rounded shadow-sm" id="canvas" title="original outline">canvas not supported</canvas></div>
 			<div class="btn-group-vertical"> 
 				<button class="btn" id="texts" title="Add text" ><span class=""><i class="fas fa-font  fa-2x"></i></span></button>
 				<button class="btn" id="colours" title="Font colour" ><span class=""><i class="fas fa-palette fa-2x"></i></span></button>
@@ -73,7 +73,7 @@
 		<h5 id="h" class="fixed-bottom mb-5"></h5>
 	</div>
 	<script src="./js/fabric.js"></script>
-<script defer src="./js/customiseControls.min.js"></script>
+	<script defer src="./js/customiseControls.min.js"></script>
 	<script src="./js/card.js" ></script>
 	<script src="https://oroafrica.github.io/store/js/fontFaceObserver.js" ></script>
 	<script >
@@ -95,7 +95,7 @@
 			  console.log('fonts loaded');
 			});
 		*/
-		$(document).ready(new Gift());
+		document.addEventListener('DOMContentLoaded',()=>{new Gift()});
 	</script>
 
 </body>
